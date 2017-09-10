@@ -1,6 +1,7 @@
 package arkhipov.bank.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,6 +21,7 @@ public class Transaction extends BaseEntity {
     private Date date = new Date();
 
     @Transient
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 

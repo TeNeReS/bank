@@ -23,7 +23,7 @@ public class BaseEntity {
         this.id = id;
     }
 
-    Integer getId() {
+    public Integer getId() {
         return id;
     }
 }

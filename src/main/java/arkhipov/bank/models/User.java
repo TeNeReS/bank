@@ -1,5 +1,7 @@
 package arkhipov.bank.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,10 +15,12 @@ public class User extends BaseEntity {
     private int age;
 
     @Transient
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Account> accountList;
 
     @Transient
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Transaction> transactionList;
 

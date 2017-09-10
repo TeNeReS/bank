@@ -1,5 +1,7 @@
 package arkhipov.bank.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,7 @@ public class Account extends BaseEntity {
     private long amount;
 
     @Transient
+    @JsonIgnore
     @JoinColumn(name = "user_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
