@@ -1,9 +1,6 @@
 package arkhipov.bank.models;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -15,12 +12,12 @@ public class User extends BaseEntity {
 
     private int age;
 
-    @OneToMany
     @Transient
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Account> accountList;
 
-    @OneToMany
     @Transient
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Transaction> transactionList;
 
     public User() {
@@ -55,6 +52,18 @@ public class User extends BaseEntity {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
+    }
+
+    public List<Transaction> getTransactionList() {
+        return transactionList;
     }
 
     @Override

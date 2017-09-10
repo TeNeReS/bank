@@ -1,44 +1,60 @@
 package arkhipov.bank.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "transactions")
 public class Transaction extends BaseEntity {
-    private Integer userId;
+    private Integer debitId;
 
-    private Integer otpravId;
+    private Integer refillId;
 
-    private Integer poluchId;
+    private long amount;
 
     private String description;
 
-    private LocalDateTime dateTime;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+    private Date date = new Date();
 
-    public Transaction(Integer userId, Integer otpravId, Integer poluchId, String description) {
-        this.userId = userId;
-        this.otpravId = otpravId;
-        this.poluchId = poluchId;
+    @Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
+    public Transaction() {
+    }
+
+    public Transaction(Integer otpravId, Integer poluchId, long amount, String description) {
+        this.debitId = otpravId;
+        this.refillId = poluchId;
+        this.amount = amount;
         this.description = description;
     }
 
-
-    public Integer getOtpravId() {
-        return otpravId;
+    public Integer getDebitId() {
+        return debitId;
     }
 
-    public void setOtpravId(Integer otpravId) {
-        this.otpravId = otpravId;
+    public void setDebitId(Integer debitId) {
+        this.debitId = debitId;
     }
 
-    public Integer getPoluchId() {
-        return poluchId;
+    public Integer getRefillId() {
+        return refillId;
     }
 
-    public void setPoluchId(Integer poluchId) {
-        this.poluchId = poluchId;
+    public void setRefillId(Integer refillId) {
+        this.refillId = refillId;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
     }
 
     public String getDescription() {
@@ -47,5 +63,25 @@ public class Transaction extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "Id=" + getId() +
+                ", debitId=" + debitId +
+                ", refillId=" + refillId +
+                ", amount=" + amount +
+                ", description=" + description +
+                ", date=" + date +
+                '}';
     }
 }

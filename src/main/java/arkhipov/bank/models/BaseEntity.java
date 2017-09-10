@@ -5,14 +5,17 @@ import javax.persistence.*;
 
 @MappedSuperclass
 public class BaseEntity {
+    public static final int START_SEQ = 100000;
+
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     private Integer id;
 
-    protected BaseEntity() {
+    BaseEntity() {
     }
 
-    protected BaseEntity(Integer id) {
+    BaseEntity(Integer id) {
         this.id = id;
     }
 
@@ -20,7 +23,7 @@ public class BaseEntity {
         this.id = id;
     }
 
-    public Integer getId() {
+    Integer getId() {
         return id;
     }
 }

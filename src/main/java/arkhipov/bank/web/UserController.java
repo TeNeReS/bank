@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public User create (@RequestBody User user){
+    public User create(@RequestBody User user){
         return repository.save(user);
     }
 
