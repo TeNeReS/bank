@@ -26,12 +26,12 @@ public class TransactionController {
     }
 
     @GetMapping("/filter")
-    public List<Transaction> getBetween(@RequestParam("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate, @RequestParam("endDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) {
-        return repository.getBetween(startDate, endDate);
+    public List<Transaction> getBetween(@RequestParam("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate, @RequestParam("endDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate, @RequestParam("userId") Integer userId) {
+        return repository.getBetweenAndByUserId(startDate, endDate, userId);
     }
 
     @PostMapping
-    public Transaction create(@RequestBody Transaction transaction) {
-        return repository.execute(transaction);
+    public Transaction create(@RequestBody Transaction transaction, Integer debitId, Integer refillId) {
+        return repository.execute(transaction, debitId, refillId);
     }
 }

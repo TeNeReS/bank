@@ -1,34 +1,37 @@
 package arkhipov.bank.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "accounts")
 public class Account extends BaseEntity {
-    private Integer userId;
-
     private long amount;
-
-    @Transient
+    
     @JoinColumn(name = "user_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
+    @OneToMany(mappedBy = "debitAccount")
+    private List<Transaction> debitTransactionList;
+
+    @OneToMany(mappedBy = "refillAccount")
+    private List<Transaction> refillTransactionList;
+    
     public Account() {
     }
 
-    public Account(Integer id, Integer userId, long amount) {
+    public Account(Integer id, long amount) {
         super(id);
-        this.userId = userId;
         this.amount = amount;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User userId) {
+        this.user = userId;
     }
 
     public long getAmount() {
@@ -39,18 +42,18 @@ public class Account extends BaseEntity {
         this.amount = amount;
     }
 
-    public User getUser() {
-        return user;
+    public List<Transaction> getDebitTransactionList() {
+        return debitTransactionList;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public List<Transaction> getRefillTransactionList() {
+        return refillTransactionList;
     }
 
     @Override
     public String toString() {
         return "Account{" +
-                "userId=" + userId +
+                "userId=" + user.getId() +
                 ", id=" + getId() +
                 ", amount=" + amount +
                 '}';

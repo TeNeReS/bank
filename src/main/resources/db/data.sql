@@ -1,7 +1,7 @@
 INSERT INTO users (name, address, age)
-VALUES  ('User0', 'user0@mail.ru', 23),
-        ('User1', 'user1@mail.ru', 24),
-        ('User2', 'user2@mail.ru', 25);
+VALUES  ('User0', 'user0@mail.ru', 24),
+        ('User1', 'user1@mail.ru', 25),
+        ('User2', 'user2@mail.ru', 26);
 
 INSERT INTO accounts (user_id, amount)
 VALUES  (100001, 1000),
@@ -11,7 +11,7 @@ VALUES  (100001, 1000),
         (100002, 5000),
         (100000, 6000);
 
-INSERT INTO transactions (debit_id, refill_id, amount, date, description)
+INSERT INTO transactions (debit_account_id, refill_account_id, amount, date, description)
 VALUES  (100003, 100008, 100, '2017-09-01 12:00:00', 'To User0'),
         (100004, NULL,   150, '2017-09-01 13:00:00', 'Store'),
         (100008, 100003, 200, '2017-09-01 20:00:00', 'From User0'),

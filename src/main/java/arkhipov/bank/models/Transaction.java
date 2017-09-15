@@ -1,52 +1,47 @@
 package arkhipov.bank.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "transactions")
 public class Transaction extends BaseEntity {
-    private Integer debitId;
-
-    private Integer refillId;
-
     private long amount;
 
     private String description;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
     private Date date = new Date();
 
-    @Transient
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
+    @JoinColumn(name = "debit_account_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Account debitAccount;
+
+    @JoinColumn(name = "refill_account_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Account refillAccount;
 
     public Transaction() {
     }
 
-    public Transaction(Integer otpravId, Integer poluchId, long amount, String description) {
-        this.debitId = otpravId;
-        this.refillId = poluchId;
+    public Transaction(long amount, String description) {
         this.amount = amount;
         this.description = description;
     }
 
-    public Integer getDebitId() {
-        return debitId;
+    public Account getDebitAccount() {
+        return debitAccount;
     }
 
-    public void setDebitId(Integer debitId) {
-        this.debitId = debitId;
+    public void setDebitAccount(Account debitAccountId) {
+        this.debitAccount = debitAccountId;
     }
 
-    public Integer getRefillId() {
-        return refillId;
+    public Account getRefillAccount() {
+        return refillAccount;
     }
 
-    public void setRefillId(Integer refillId) {
-        this.refillId = refillId;
+    public void setRefillAccount(Account refillAccountId) {
+        this.refillAccount = refillAccountId;
     }
 
     public long getAmount() {
@@ -69,18 +64,17 @@ public class Transaction extends BaseEntity {
         return date;
     }
 
-    public User getUser() {
-        return user;
-    }
-
     @Override
     public String toString() {
+        String debitAccountId =  getDebitAccount() != null ? debitAccount.getId().toString() : "Empty";
+        String refillAccountId =  getRefillAccount() != null ? refillAccount.getId().toString() : "Empty";
+        String desc = description != null ? description : "Empty";
         return "Transaction{" +
                 "Id=" + getId() +
-                ", debitId=" + debitId +
-                ", refillId=" + refillId +
+                ", debitAccountId=" + debitAccountId +
+                ", refillAccountId=" + refillAccountId +
                 ", amount=" + amount +
-                ", description=" + description +
+                ", description=" + desc +
                 ", date=" + date +
                 '}';
     }

@@ -12,13 +12,8 @@ public class User extends BaseEntity {
 
     private int age;
 
-    @Transient
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     private List<Account> accountList;
-
-    @Transient
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<Transaction> transactionList;
 
     public User() {
     }
@@ -56,14 +51,6 @@ public class User extends BaseEntity {
 
     public List<Account> getAccountList() {
         return accountList;
-    }
-
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
-    }
-
-    public List<Transaction> getTransactionList() {
-        return transactionList;
     }
 
     @Override

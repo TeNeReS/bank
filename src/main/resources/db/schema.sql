@@ -25,13 +25,13 @@ CREATE TABLE accounts
 
 CREATE TABLE transactions
 (
-  id          INTEGER DEFAULT nextval('global_seq'),
-  debit_id    INTEGER,
-  refill_id   INTEGER,
-  amount      BIGINT NOT NULL,
-  date        TIMESTAMP NOT NULL DEFAULT now(),
-  description VARCHAR,
+  id                  INTEGER DEFAULT nextval('global_seq'),
+  debit_account_id    INTEGER,
+  refill_account_id   INTEGER,
+  amount              BIGINT NOT NULL,
+  date                TIMESTAMP NOT NULL DEFAULT now(),
+  description         VARCHAR,
   PRIMARY KEY (id),
-  FOREIGN KEY (refill_id) REFERENCES accounts (id),
-  FOREIGN KEY (debit_id) REFERENCES accounts (id)
+  FOREIGN KEY (debit_account_id) REFERENCES accounts (id),
+  FOREIGN KEY (refill_account_id) REFERENCES accounts (id)
 );

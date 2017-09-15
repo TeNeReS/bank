@@ -7,77 +7,87 @@
   <version>1.0-SNAPSHOT</version>
   <name>Bank</name>
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.6.RELEASE</version>
-  </parent>
-
   <properties>
-    <java.version>1.8</java.version>
+    <spring.version>4.3.10.RELEASE</spring.version>
+    <spring-data-jpa.version>1.11.7.RELEASE</spring-data-jpa.version>
+    <hibernate.version>5.2.10.Final</hibernate.version>
     <postgresql.version>42.0.0</postgresql.version>
     <h2.version>1.4.193</h2.version>
+    <jetty-maven-plugin.version>9.4.5.v20170502</jetty-maven-plugin.version>
   </properties>
 
   <dependencies>
-
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.version}</version>
     </dependency>
 
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>${spring-data-jpa.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+    <!--<dependency>-->
+      <!--<groupId>log4j</groupId>-->
+      <!--<artifactId>log4j</artifactId>-->
+      <!--<version>1.2.17</version>-->
+    <!--</dependency>-->
   </dependencies>
 
   <profiles>
-  <profile>
-    <id>h2</id>
-    <properties>
-      <activeProfile>h2</activeProfile>
-    </properties>
-    <dependencies>
-      <dependency>
-        <groupId>com.h2database</groupId>
-        <artifactId>h2</artifactId>
-        <version>${h2.version}</version>
-      </dependency>
-    </dependencies>
-    <activation>
-      <activeByDefault>true</activeByDefault>
-    </activation>
-  </profile>
+    <profile>
+      <id>h2</id>
+      <dependencies>
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <version>${h2.version}</version>
+        </dependency>
+      </dependencies>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
 
-  <profile>
-    <id>postgres</id>
-    <properties>
-      <activeProfile>postgres</activeProfile>
-    </properties>
-    <dependencies>
-      <dependency>
-        <groupId>org.postgresql</groupId>
-        <artifactId>postgresql</artifactId>
-        <version>${postgresql.version}</version>
-      </dependency>
-    </dependencies>
-  </profile>
+    <profile>
+      <id>postgres</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.postgresql</groupId>
+          <artifactId>postgresql</artifactId>
+          <version>${postgresql.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
   </profiles>
 
   <build>
     <finalName>Bank</finalName>
     <plugins>
       <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>1.5.6.RELEASE</version>
-        <configuration>
-          <profiles>
-            <profile>postgres</profile>
-          </profiles>
-        </configuration>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>${jetty-maven-plugin.version}</version>
       </plugin>
     </plugins>
   </build>
