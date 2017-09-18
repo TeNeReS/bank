@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Список клиентов</title>
+</h:head>
+
+<h:body>
+
+    <h1>Список клиентов</h1>
+
+    <p:dataTable id="userTable" var="user" value="#{userBean.all}" rows="10"
+                 paginator="true"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+        <p:column headerText="Id">
+            <h:outputText value="#{user.id}"/>
+        </p:column>
+
+        <p:column headerText="Имя">
+            <p:link outcome="accounts" value="#{user.name}">
+                <f:param name="userId" value="#{user.id}" />
+            </p:link>
+        </p:column>
+
+        <p:column headerText="Адрес">
+            <h:outputText value="#{user.address}"/>
+        </p:column>
+
+        <p:column headerText="Возраст">
+            <h:outputText value="#{user.age}"/>
+        </p:column>
+    </p:dataTable>
+
+    <h1>Добавить клиента</h1>
+
+    <h:form>
+        <p:messages autoUpdate="true"/>
+
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel for="name" value="Имя: "/>
+            <p:inputText id="name" required="true" value="#{userBean.name}"/>
+
+            <p:outputLabel for="address" value="Адрес:"/>
+            <p:inputText id="address" required="true" value="#{userBean.address}"/>
+
+            <p:outputLabel for="age" value="Возраст:"/>
+            <p:inputNumber id="age" required="true" value="#{userBean.age}"/>
+
+            <p:commandButton value="Очистить" type="reset"/>
+            <p:commandButton value="Создать" update="userTable" action="#{userBean.create}"/>
+        </h:panelGrid>
+    </h:form>
+
+</h:body>
+
+</html>

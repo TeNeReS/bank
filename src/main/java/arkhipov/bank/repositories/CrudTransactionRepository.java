@@ -22,6 +22,6 @@ public interface CrudTransactionRepository extends CrudRepository<Transaction, I
     @Query("SELECT t FROM Transaction t WHERE t.debitAccount.user.id=:userId OR t.refillAccount.user.id=:userId")
     List<Transaction> findByUserId(@Param("userId") int userId);
 
-    @Query("SELECT t FROM Transaction t WHERE (t.debitAccount.user.id=:userId OR t.refillAccount.user.id=:userId) AND t.date between :startDate and :endDate")
-    List<Transaction> findByDateBetweenAndUserId(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("userId")int userId);
+//    @Query("SELECT t FROM Transaction t WHERE (t.debitAccount.user.id=:userId OR t.refillAccount.user.id=:userId) AND t.date between :startDate and :endDate")
+//    List<Transaction> findByDateBetweenAndUserId(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("userId")int userId);
 }

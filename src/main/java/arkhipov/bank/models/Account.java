@@ -21,8 +21,7 @@ public class Account extends BaseEntity {
     public Account() {
     }
 
-    public Account(Integer id, long amount) {
-        super(id);
+    public Account(long amount) {
         this.amount = amount;
     }
 

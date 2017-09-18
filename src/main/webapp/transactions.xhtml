@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Транзакции</title>
+</h:head>
+
+<h:body>
+
+    <h1>Список всех транзакций</h1>
+
+            <h:form>
+                <h2>Фильтровать по дате</h2>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="startDate" value="C: "/>
+                    <p:calendar id="startDate" value="#{transactionBean.startDate}"/>
+
+                    <p:outputLabel for="endDate" value="По: "/>
+                    <p:calendar id="endDate" value="#{transactionBean.endDate}"/>
+
+                    <p:commandButton value="Очистить" type="reset" action="#{transactionBean.clearForm}"/>
+                    <p:commandButton value="Отфильтровать" update="transactionTable" action="#{transactionBean.filter}"/>
+                </h:panelGrid>
+            </h:form>
+
+    <p:dataTable id="transactionTable" var="transaction" value="#{transactionBean.transactionList}" rows="10"
+                 paginator="true"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+        <p:column headerText="Id">
+            <h:outputText value="#{transaction.id}"/>
+        </p:column>
+
+        <p:column headerText="Счет отправления">
+            <h:outputText value="#{transaction.debitAccount.id}"/>
+        </p:column>
+
+        <p:column headerText="Счет назначения">
+            <h:outputText value="#{transaction.refillAccount.id}"/>
+        </p:column>
+
+        <p:column headerText="Дата">
+            <h:outputText value="#{transaction.date}"/>
+        </p:column>
+
+        <p:column headerText="Описание">
+            <h:outputText value="#{transaction.description}"/>
+        </p:column>
+
+        <p:column headerText="Сумма">
+            <h:outputText value="#{transaction.amount}"/>
+        </p:column>
+    </p:dataTable>
+</h:body>
+
+</html>

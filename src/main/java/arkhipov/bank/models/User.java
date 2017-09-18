@@ -7,9 +7,7 @@ import java.util.List;
 @Table(name = "users")
 public class User extends BaseEntity {
     private String name;
-
     private String address;
-
     private int age;
 
     @OneToMany(mappedBy = "user")

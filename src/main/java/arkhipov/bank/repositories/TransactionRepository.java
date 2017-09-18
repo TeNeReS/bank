@@ -6,9 +6,11 @@ import java.util.Date;
 import java.util.List;
 
 public interface TransactionRepository {
-    List<Transaction> findAll();
+    List<Transaction> getAll();
 
-    List<Transaction> getBetweenAndByUserId(Date startDate, Date endDate, Integer userId);
+    List<Transaction> getBetween(Date startDate, Date endDate);
+
+    List<Transaction> getByUserId(int userId);
 
     Transaction execute(Transaction transaction, Integer debitId, Integer refillId);
 }
