@@ -11,18 +11,18 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <!--<beans profile="h2">-->
-    <!--<context:property-placeholder location="classpath:db/h2.properties" system-properties-mode="OVERRIDE"/>-->
+    <beans profile="h2">
+    <context:property-placeholder location="classpath:db/h2.properties" system-properties-mode="OVERRIDE"/>
 
-    <!--<bean id="dataSource"-->
+    <bean id="dataSource"
           <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource"-->
-          <!--p:driverClassName="org.h2.Driver"-->
-          <!--p:url="${database.url}"-->
-          <!--p:username="${database.username}"-->
-          <!--p:password="${database.password}"/>-->
-    <!--</beans>-->
+          p:driverClassName="org.h2.Driver"
+          p:url="${database.url}"
+          p:username="${database.username}"
+          p:password="${database.password}"/>
+    </beans>
 
-    <!--<beans profile="postgres">-->
+    <beans profile="postgres">
     <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
 
     <bean id="dataSource"
@@ -31,9 +31,9 @@
     p:url="${database.url}"
     p:username="${database.username}"
     p:password="${database.password}"/>
-    <!--</beans>-->
+    </beans>
 
-    <!--<beans profile="h2,postgres">-->
+    <beans profile="h2,postgres">
         <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
             <jdbc:script location="classpath:db/${jdbc.initLocation}"/>
             <jdbc:script encoding="utf-8" location="classpath:db/data.sql"/>
@@ -66,6 +66,6 @@
 
         <jpa:repositories base-package="arkhipov.bank.repositories" entity-manager-factory-ref="entityManagerFactory"
                           transaction-manager-ref="transactionManager"/>
-    <!--</beans>-->
+    </beans>
 
 </beans>
