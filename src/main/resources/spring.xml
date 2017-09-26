@@ -15,7 +15,7 @@
     <context:property-placeholder location="classpath:db/h2.properties" system-properties-mode="OVERRIDE"/>
 
     <bean id="dataSource"
-          <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource"-->
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource"
           p:driverClassName="org.h2.Driver"
           p:url="${database.url}"
           p:username="${database.username}"
