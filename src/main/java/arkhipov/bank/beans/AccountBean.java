@@ -93,25 +93,25 @@ public class AccountBean implements Serializable{
         for (Account account : accountList) {
             accountIdList.add(account.getId());
         }
-        setAccountIdList(accountIdList);
+        this.accountIdList = accountIdList;
         return accountList;
     }
 
     public void create(){
-        Account created = new Account(getAmount());
-        accountRepository.create(created, getUserId());
+        Account newAccount = new Account(amount);
+        accountRepository.create(newAccount, userId);
         clearForm();
     }
 
     public void transfer() {
-        transactionRepository.execute(new Transaction(getAmount(), getTransactionDescription()), getDebitId(), getRefillId());
+        transactionRepository.execute(new Transaction(amount, transactionDescription), debitId, refillId);
         clearForm();
     }
 
     private void clearForm(){
-        setAmount(0);
-        setDebitId(null);
-        setRefillId(null);
-        setTransactionDescription(null);
+        this.amount = 0;
+        this.debitId = null;
+        this.refillId = null;
+        this.transactionDescription = null;
     }
 }

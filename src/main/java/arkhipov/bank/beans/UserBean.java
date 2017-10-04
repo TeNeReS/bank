@@ -25,8 +25,6 @@ public class UserBean implements Serializable{
 
     private long total;
 
-    private List<User> filteredUser;
-
     @Autowired
     public UserBean(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -64,24 +62,13 @@ public class UserBean implements Serializable{
         this.total = total;
     }
 
-    public List<User> getFilteredUser() {
-        return filteredUser;
-    }
-
-    public void setFilteredUser(List<User> filteredUser) {
-        this.filteredUser = filteredUser;
-    }
-
     public List<User> getAll() {
         return (List<User>) userRepository.findAll();
     }
 
     public void create(){
-        System.out.println("----------------------------------------------------------");
-        System.out.println(getName() + getAddress() + getAge());
-        User created = new User(null, getName(), getAddress(), getAge());
-        System.out.println(created);
-        userRepository.save(created);
+        User newUser = new User(null, name, address, age);
+        userRepository.save(newUser);
         clearForm();
     }
 
@@ -91,13 +78,13 @@ public class UserBean implements Serializable{
         for (Account account : user.getAccountList()) {
             sum += account.getAmount();
         }
-        setTotal(sum);
+        this.total = sum;
         return user;
     }
 
     private void clearForm(){
-        setName(null);
-        setAddress(null);
-        setAge(null);
+        this.name = null;
+        this.address = null;
+        this.age = null;
     }
 }

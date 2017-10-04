@@ -58,13 +58,13 @@ public class TransactionBean implements Serializable {
     public void filter() {
         if (startDate == null && endDate == null ) transactionList = transactionRepository.getAll();
         else {
-            transactionList = transactionRepository.getBetween(getStartDate(), getEndDate());
+            transactionList = transactionRepository.getBetween(startDate, endDate);
             clearForm();
         }
     }
 
     public void clearForm(){
-        setStartDate(null);
-        setEndDate(null);
+        this.startDate = null;
+        this.endDate = null;
     }
 }
