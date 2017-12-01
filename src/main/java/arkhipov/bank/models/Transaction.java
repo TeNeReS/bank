@@ -1,8 +1,15 @@
 package arkhipov.bank.models;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper = false)
+@Data
+@NoArgsConstructor
 @Entity
 public class Transaction extends BaseEntity {
     private long amount;
@@ -17,62 +24,8 @@ public class Transaction extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private Account refillAccount;
 
-    public Transaction() {
-    }
-
     public Transaction(long amount, String description) {
         this.amount = amount;
         this.description = description;
-    }
-
-    public Account getDebitAccount() {
-        return debitAccount;
-    }
-
-    public void setDebitAccount(Account debitAccountId) {
-        this.debitAccount = debitAccountId;
-    }
-
-    public Account getRefillAccount() {
-        return refillAccount;
-    }
-
-    public void setRefillAccount(Account refillAccountId) {
-        this.refillAccount = refillAccountId;
-    }
-
-    public long getAmount() {
-        return amount;
-    }
-
-    public void setAmount(long amount) {
-        this.amount = amount;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    @Override
-    public String toString() {
-        String debitAccountId =  getDebitAccount() != null ? debitAccount.getId().toString() : "Empty";
-        String refillAccountId =  getRefillAccount() != null ? refillAccount.getId().toString() : "Empty";
-        String desc = description != null ? description : "Empty";
-        return "Transaction{" +
-                "Id=" + getId() +
-                ", debitAccountId=" + debitAccountId +
-                ", refillAccountId=" + refillAccountId +
-                ", amount=" + amount +
-                ", description=" + desc +
-                ", date=" + date +
-                '}';
     }
 }

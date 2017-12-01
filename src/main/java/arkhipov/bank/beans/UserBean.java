@@ -67,7 +67,7 @@ public class UserBean implements Serializable{
     }
 
     public void create(){
-        User newUser = new User(null, name, address, age);
+        User newUser = new User(name, address, age);
         userRepository.save(newUser);
         clearForm();
     }
