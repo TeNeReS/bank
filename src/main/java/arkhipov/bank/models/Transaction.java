@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "transactions")
 public class Transaction extends BaseEntity {
     private long amount;
 
@@ -12,11 +11,9 @@ public class Transaction extends BaseEntity {
 
     private Date date = new Date();
 
-    @JoinColumn(name = "debit_account_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private Account debitAccount;
 
-    @JoinColumn(name = "refill_account_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private Account refillAccount;
 

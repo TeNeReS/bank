@@ -4,11 +4,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "accounts")
 public class Account extends BaseEntity {
     private long amount;
     
-    @JoinColumn(name = "user_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
