@@ -15,7 +15,7 @@ public class Account extends BaseEntity {
     private long amount;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    private User user;
+    private Person person;
 
     @OneToMany(mappedBy = "debitAccount")
     private List<Transaction> debitTransactionList;

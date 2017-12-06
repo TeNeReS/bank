@@ -7,5 +7,5 @@ import java.util.List;
 public interface AccountRepository {
     List<Account> getAll(int id);
 
-    Account create (Account account, int userId);
+    Account create (Account account, int personId);
 }

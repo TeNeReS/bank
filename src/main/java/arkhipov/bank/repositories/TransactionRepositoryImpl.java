@@ -30,8 +30,8 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         return crudTransactionRepository.findByDateBetween(startDate, new Date(endDate.getTime() + (1000 * 60 * 60 * 24)));
     }
 
-    public List<Transaction> getByUserId(int userId) {
-        return crudTransactionRepository.findByUserId(userId);
+    public List<Transaction> getByPersonId(int personId) {
+        return crudTransactionRepository.findByPersonId(personId);
     }
 
     @Transactional

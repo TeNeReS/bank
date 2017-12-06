@@ -21,7 +21,7 @@ public class AccountBean implements Serializable{
 
     private TransactionRepository transactionRepository;
 
-    private int userId;
+    private int personId;
 
     private long amount;
 
@@ -33,12 +33,12 @@ public class AccountBean implements Serializable{
 
     private List<Integer> accountIdList;
 
-    public int getUserId() {
-        return userId;
+    public int getPersonId() {
+        return personId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
     public long getAmount() {
@@ -88,7 +88,7 @@ public class AccountBean implements Serializable{
     }
 
     public List<Account> getAll() {
-        List<Account> accountList = accountRepository.getAll(userId);
+        List<Account> accountList = accountRepository.getAll(personId);
         List<Integer> accountIdList = new ArrayList<Integer>();
         for (Account account : accountList) {
             accountIdList.add(account.getId());
@@ -99,7 +99,7 @@ public class AccountBean implements Serializable{
 
     public void create(){
         Account newAccount = new Account(amount);
-        accountRepository.create(newAccount, userId);
+        accountRepository.create(newAccount, personId);
         clearForm();
     }
 

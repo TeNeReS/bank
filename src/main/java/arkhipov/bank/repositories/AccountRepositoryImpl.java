@@ -11,21 +11,21 @@ import java.util.List;
 public class AccountRepositoryImpl implements AccountRepository {
     private CrudAccountRepository crudAccountRepository;
 
-    private UserRepository userRepository;
+    private PersonRepository personRepository;
 
     @Autowired
-    public AccountRepositoryImpl(CrudAccountRepository crudAccountRepository, UserRepository userRepository) {
+    public AccountRepositoryImpl(CrudAccountRepository crudAccountRepository, PersonRepository personRepository) {
         this.crudAccountRepository = crudAccountRepository;
-        this.userRepository = userRepository;
+        this.personRepository = personRepository;
     }
 
-    public List<Account> getAll(int userId) {
-        return crudAccountRepository.getAll(userId);
+    public List<Account> getAll(int personId) {
+        return crudAccountRepository.getAll(personId);
     }
 
     @Transactional
-    public Account create(Account account, int userId) {
-        account.setUser(userRepository.findOne(userId));
+    public Account create(Account account, int personId) {
+        account.setPerson(personRepository.findOne(personId));
         return crudAccountRepository.save(account);
     }
 }

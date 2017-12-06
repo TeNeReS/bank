@@ -2,16 +2,13 @@ package arkhipov.bank;
 
 import arkhipov.bank.models.Account;
 import arkhipov.bank.models.Transaction;
-import arkhipov.bank.models.User;
+import arkhipov.bank.models.Person;
 import arkhipov.bank.repositories.CrudAccountRepository;
 import arkhipov.bank.repositories.TransactionRepository;
-import arkhipov.bank.repositories.UserRepository;
+import arkhipov.bank.repositories.PersonRepository;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 import static arkhipov.bank.models.BaseEntity.START_SEQ;
 
@@ -22,15 +19,15 @@ public class Bank {
 //        context.load("classpath:spring.xml"); //move from src.main.java to src.main.resources
 //        context.refresh();
 //
-//        UserRepository userRepository = context.getBean(UserRepository.class);
+//        PersonRepository personRepository = context.getBean(PersonRepository.class);
 //        TransactionRepository transactionRepository = context.getBean(TransactionRepository.class);
 //        CrudAccountRepository accountRepository = context.getBean(CrudAccountRepository.class);
-//
-//        for (User user : userRepository.findAll()) {
-//            System.out.println(user.toString());
+
+//        for (Person person : personRepository.findAll()) {
+//            System.out.println(person.toString());
 //        }
 //
-//        for (Account account : userRepository.getWithAccounts(100001).getAccountList()) {
+//        for (Account account : personRepository.getWithAccounts(100001).getAccountList()) {
 //            System.out.println(account);
 //        }
 //

@@ -10,7 +10,7 @@ public interface TransactionRepository {
 
     List<Transaction> getBetween(Date startDate, Date endDate);
 
-    List<Transaction> getByUserId(int userId);
+    List<Transaction> getByPersonId(int personId);
 
     Transaction execute(Transaction transaction, Integer debitId, Integer refillId);
 }

@@ -14,7 +14,7 @@
     <h1>Список счетов</h1>
 
     <f:metadata>
-        <f:viewParam name="userId" value="#{accountBean.userId}"/>
+        <f:viewParam name="personId" value="#{accountBean.personId}"/>
     </f:metadata>
 
     <p:dataTable id="accountTable" var="account" value="#{accountBean.getAll()}" rows="10"

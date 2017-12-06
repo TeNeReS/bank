@@ -1,8 +1,8 @@
 package arkhipov.bank.beans;
 
 import arkhipov.bank.models.Account;
-import arkhipov.bank.models.User;
-import arkhipov.bank.repositories.UserRepository;
+import arkhipov.bank.models.Person;
+import arkhipov.bank.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,8 +14,8 @@ import java.util.List;
 @Component
 @ManagedBean
 @ViewScoped
-public class UserBean implements Serializable{
-    private UserRepository userRepository;
+public class PersonBean implements Serializable{
+    private PersonRepository personRepository;
 
     private String name;
 
@@ -26,8 +26,8 @@ public class UserBean implements Serializable{
     private long total;
 
     @Autowired
-    public UserBean(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public PersonBean(PersonRepository personRepository) {
+        this.personRepository = personRepository;
     }
 
     public String getName() {
@@ -62,24 +62,24 @@ public class UserBean implements Serializable{
         this.total = total;
     }
 
-    public List<User> getAll() {
-        return (List<User>) userRepository.findAll();
+    public List<Person> getAll() {
+        return (List<Person>) personRepository.findAll();
     }
 
     public void create(){
-        User newUser = new User(name, address, age);
-        userRepository.save(newUser);
+        Person newPerson = new Person(name, address, age);
+        personRepository.save(newPerson);
         clearForm();
     }
 
-    public User getWithAccounts(int id) {
-        User user = userRepository.getWithAccounts(id);
+    public Person getWithAccounts(int id) {
+        Person person = personRepository.getWithAccounts(id);
         long sum = 0;
-        for (Account account : user.getAccountList()) {
+        for (Account account : person.getAccountList()) {
             sum += account.getAmount();
         }
         this.total = sum;
-        return user;
+        return person;
     }
 
     private void clearForm(){

@@ -1,6 +1,6 @@
 package arkhipov.bank.repositories;
 
-import arkhipov.bank.models.User;
+import arkhipov.bank.models.Person;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Transactional(readOnly = true)
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface PersonRepository extends CrudRepository<Person, Integer> {
     @EntityGraph(attributePaths = "accountList")
-    @Query("SELECT u FROM User u WHERE u.id=:id")
-    User getWithAccounts (@Param("id") int id);
+    @Query("SELECT u FROM Person u WHERE u.id=:id")
+    Person getWithAccounts (@Param("id") int id);
 }

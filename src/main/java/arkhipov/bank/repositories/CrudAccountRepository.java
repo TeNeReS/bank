@@ -10,6 +10,6 @@ import java.util.List;
 
 @Transactional(readOnly = true)
 public interface CrudAccountRepository extends CrudRepository<Account, Integer> {
-    @Query("SELECT a FROM Account a WHERE a.user.id=:userId")
-    List<Account> getAll(@Param("userId") int userId);
+    @Query("SELECT a FROM Account a WHERE a.person.id=:personId")
+    List<Account> getAll(@Param("personId") int personId);
 }

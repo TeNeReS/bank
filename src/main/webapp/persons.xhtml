@@ -14,25 +14,25 @@
 
     <h1>Список клиентов</h1>
 
-    <p:dataTable id="userTable" var="user" value="#{userBean.all}" rows="10"
+    <p:dataTable id="personTable" var="person" value="#{personBean.all}" rows="10"
                  paginator="true"
                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
         <p:column headerText="Id">
-            <h:outputText value="#{user.id}"/>
+            <h:outputText value="#{person.id}"/>
         </p:column>
 
         <p:column headerText="Имя">
-            <p:link outcome="accounts" value="#{user.name}">
-                <f:param name="userId" value="#{user.id}" />
+            <p:link outcome="accounts" value="#{person.name}">
+                <f:param name="personId" value="#{person.id}" />
             </p:link>
         </p:column>
 
         <p:column headerText="Адрес">
-            <h:outputText value="#{user.address}"/>
+            <h:outputText value="#{person.address}"/>
         </p:column>
 
         <p:column headerText="Возраст">
-            <h:outputText value="#{user.age}"/>
+            <h:outputText value="#{person.age}"/>
         </p:column>
     </p:dataTable>
 
@@ -43,16 +43,16 @@
 
         <h:panelGrid columns="2" cellpadding="5">
             <p:outputLabel for="name" value="Имя: "/>
-            <p:inputText id="name" required="true" value="#{userBean.name}"/>
+            <p:inputText id="name" required="true" value="#{personBean.name}"/>
 
             <p:outputLabel for="address" value="Адрес:"/>
-            <p:inputText id="address" required="true" value="#{userBean.address}"/>
+            <p:inputText id="address" required="true" value="#{personBean.address}"/>
 
             <p:outputLabel for="age" value="Возраст:"/>
-            <p:inputNumber id="age" required="true" value="#{userBean.age}"/>
+            <p:inputNumber id="age" required="true" value="#{personBean.age}"/>
 
             <p:commandButton value="Очистить" type="reset"/>
-            <p:commandButton value="Создать" update="userTable" action="#{userBean.create}"/>
+            <p:commandButton value="Создать" update="personTable" action="#{personBean.create}"/>
         </h:panelGrid>
     </h:form>
 

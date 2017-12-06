@@ -9,16 +9,15 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "users")
-public class User extends BaseEntity {
+public class Person extends BaseEntity {
     private String name;
     private String address;
     private int age;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "person")
     private List<Account> accountList;
 
-    public User(String name, String address, int age) {
+    public Person(String name, String address, int age) {
         this.name = name;
         this.address = address;
         this.age = age;
