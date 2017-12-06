@@ -1,6 +1,7 @@
 .idea
+.gradle
+log
 out
 target
 *.iml
-log
 *.patch
