@@ -21,7 +21,7 @@ VALUES  (100013, 100001, 1000),
         (100017, 100002, 5000),
         (100018, 100000, 6000);
 
-INSERT INTO "transaction" (id, debitaccount_id, refillaccount_id, amount, date, description)
+INSERT INTO "transaction" (id, debit_account_id, refill_account_id, amount, date, description)
 VALUES  (100019, 100013, 100018, 100, '2017-09-01 12:00:00', 'To Person0'),
         (100020, 100014, NULL,   150, '2017-09-01 13:00:00', 'Store'),
         (100021, 100018, 100013, 200, '2017-09-01 20:00:00', 'From Person0'),
