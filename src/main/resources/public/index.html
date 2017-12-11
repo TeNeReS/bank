@@ -1,16 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" ng-app="bankApp">
 <head>
+    <meta charset="UTF-8">
     <title>Банк</title>
 </head>
 
-<body>
+<body ng-controller="mainController">
     <h1>Банк</h1>
 
-    <p>Список клиентов</p>
-    <p>Список транзакций</p>
+    <a href="#!persons">Список клиентов</a>
+    <a href="#!transactions">Список транзакций</a>
+
+    <ng-view></ng-view>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-route.js"></script>
+<script src="js/controller.js"></script>
 </body>
 
 </html>
