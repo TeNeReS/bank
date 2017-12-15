@@ -1,1 +1,22 @@
 <h1>Persons</h1>
+
+<div ng-controller="personsController">
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Address</th>
+            <th>Age</th>
+        </tr>
+        <tr ng-repeat="person in persons">
+            <td>{{ person.id }}</td>
+            <td>{{ person.name }}</td>
+            <td>{{ person.address }}</td>
+            <td>{{ person.age }}</td>
+        </tr>
+    </table>
+
+</div>
+
+<a href="#!accounts">Список счетов</a>

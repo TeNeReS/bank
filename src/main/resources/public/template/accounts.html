@@ -1,0 +1,16 @@
+<h1>Accounts</h1>
+
+<div ng-controller="accountsController">
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Amount</th>
+        </tr>
+        <tr ng-repeat="account in accounts">
+            <td>{{ account.id }}</td>
+            <td>{{ account.amount }}</td>
+        </tr>
+    </table>
+
+</div>

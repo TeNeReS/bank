@@ -1,1 +1,24 @@
 <h1>Transactions</h1>
+
+<div ng-controller="transactionsController">
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Debit Account</th>
+            <th>Refill Account</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Description</th>
+        </tr>
+        <tr ng-repeat="transaction in transactions">
+            <td>{{ transaction.id }}</td>
+            <td>{{ transaction.debitAccount.id }}</td>
+            <td>{{ transaction.refillAccount.id }}</td>
+            <td>{{ transaction.date }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.description }}</td>
+        </tr>
+    </table>
+
+</div>
