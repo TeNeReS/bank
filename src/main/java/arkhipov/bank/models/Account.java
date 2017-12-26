@@ -1,7 +1,6 @@
 package arkhipov.bank.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -9,9 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 @EqualsAndHashCode(callSuper = false)
 @Data
 @NoArgsConstructor
@@ -22,9 +18,11 @@ public class Account extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private Person person;
 
+    @JsonIgnoreProperties({"debitAccount", "refillAccount"})
     @OneToMany(mappedBy = "debitAccount")
     private List<Transaction> debitTransactionList;
 
+    @JsonIgnoreProperties({"debitAccount", "refillAccount"})
     @OneToMany(mappedBy = "refillAccount")
     private List<Transaction> refillTransactionList;
 

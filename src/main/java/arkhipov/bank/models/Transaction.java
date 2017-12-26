@@ -1,17 +1,13 @@
 package arkhipov.bank.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import arkhipov.bank.util.LocalDateTimeConverter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 @EqualsAndHashCode(callSuper = false)
 @Data
 @NoArgsConstructor
@@ -21,7 +17,8 @@ public class Transaction extends BaseEntity {
 
     private String description;
 
-    private Date date = new Date();
+    @Convert(converter = LocalDateTimeConverter.class)
+    private LocalDateTime date = LocalDateTime.now();
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Account debitAccount;

@@ -37,6 +37,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-jetty")
     compile("org.springframework.boot:spring-boot-devtools")
 
-    compile group: 'org.projectlombok', name: 'lombok', version:'1.16.18'
-    compile group: 'org.postgresql', name: 'postgresql', version:'42.0.0'
+    compile("org.projectlombok:lombok:1.16.18")
+    compile("org.postgresql:postgresql:42.0.0")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.3")
 }

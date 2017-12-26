@@ -1,15 +1,11 @@
 package arkhipov.bank.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 @EqualsAndHashCode(callSuper = false)
 @Data
 @NoArgsConstructor
@@ -19,6 +15,7 @@ public class Person extends BaseEntity {
     private String address;
     private int age;
 
+    @JsonIgnoreProperties("person")
     @OneToMany(mappedBy = "person")
     private List<Account> accountList;
 
