@@ -41,6 +41,12 @@ bankApp.controller('mainController', function($scope) {
 
 bankApp.controller('personsController', function($scope, Person) {
     $scope.persons = Person.query();
+    $scope.submit = function() {
+        var newPerson = new Person();
+        newPerson.name = $scope.name;
+        newPerson.address = $scope.address;
+        newPerson.age = $scope.age;
+    };
 });
 
 bankApp.controller('transactionsController', function($scope, Transaction) {

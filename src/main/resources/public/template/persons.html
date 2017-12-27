@@ -17,6 +17,13 @@
         </tr>
     </table>
 
+    <form ng-submit="submit()" ng-controller="personsController">
+        <label>Name:<input type="text" ng-model="name" name="name"/></label>
+        <label>Address:<input type="text" ng-model="address" name="address"/></label>
+        <label>Age:<input type="text" ng-model="age" name="age"/></label>
+        <input type="submit" id="submit" value="Create" />
+    </form>
+
 </div>
 
 <a href="#!accounts">Список счетов</a>
