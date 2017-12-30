@@ -14,7 +14,7 @@ bankApp.config(function($routeProvider){
             templateUrl:'template/transactions.html',
             controller:'transactionsController'
         })
-        .when('/accounts',{
+        .when('/persons/:id/accounts',{
             templateUrl:'template/accounts.html',
             controller:'accountsController'
         })
@@ -32,7 +32,7 @@ bankApp.factory('Person', function($resource) {
 });
 
 bankApp.factory('Account', function($resource) {
-    return $resource('persons/:personId/accounts', {});
+    return $resource('persons/:id/accounts', {});
 });
 
 bankApp.controller('mainController', function($scope) {
@@ -41,11 +41,14 @@ bankApp.controller('mainController', function($scope) {
 
 bankApp.controller('personsController', function($scope, Person) {
     $scope.persons = Person.query();
+    $scope.editPerson = {};
     $scope.submit = function() {
-        var newPerson = new Person();
-        newPerson.name = $scope.name;
-        newPerson.address = $scope.address;
-        newPerson.age = $scope.age;
+        var newPerson = $scope.editPerson;
+        Person.save(newPerson)
+            .$promise.then(function(personFromServer) {
+            $scope.persons.push(personFromServer);
+        });
+        $scope.editPerson = {};
     };
 });
 
@@ -53,6 +56,15 @@ bankApp.controller('transactionsController', function($scope, Transaction) {
     $scope.transactions = Transaction.query();
 });
 
-bankApp.controller('accountsController', function($scope, Account) {
-    $scope.accounts = Account.query({personId: 100002});
+bankApp.controller('accountsController', function($scope, $route, Account) {
+    $scope.accounts = Account.query({id: $route.current.params.id});
+    $scope.editAccount = {};
+    $scope.submit = function() {
+        var newAccount = $scope.editAccount;
+        Account.save({id: $route.current.params.id}, newAccount)
+            .$promise.then(function(accountFromServer) {
+            $scope.accounts.push(accountFromServer);
+        });
+        $scope.editAccount = {};
+    };
 });

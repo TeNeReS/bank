@@ -5,25 +5,24 @@
     <table>
         <tr>
             <th>ID</th>
-            <th>First Name</th>
+            <th>Name</th>
             <th>Address</th>
             <th>Age</th>
         </tr>
         <tr ng-repeat="person in persons">
             <td>{{ person.id }}</td>
-            <td>{{ person.name }}</td>
+            <td><a href="#!persons/{{person.id}}/accounts">{{ person.name }}</a></td>
             <td>{{ person.address }}</td>
             <td>{{ person.age }}</td>
         </tr>
     </table>
 
-    <form ng-submit="submit()" ng-controller="personsController">
-        <label>Name:<input type="text" ng-model="name" name="name"/></label>
-        <label>Address:<input type="text" ng-model="address" name="address"/></label>
-        <label>Age:<input type="text" ng-model="age" name="age"/></label>
-        <input type="submit" id="submit" value="Create" />
+    <h2>Add person</h2>
+    <form ng-submit="submit()">
+        <label>Name:<input type="text" ng-model="editPerson.name" name="name"/></label>
+        <label>Address:<input type="text" ng-model="editPerson.address" name="address"/></label>
+        <label>Age:<input type="text" ng-model="editPerson.age" name="age"/></label>
+        <input type="submit" id="submit" value="Add" />
     </form>
 
 </div>
-
-<a href="#!accounts">Список счетов</a>
