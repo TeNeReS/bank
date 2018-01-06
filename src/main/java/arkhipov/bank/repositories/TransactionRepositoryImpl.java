@@ -1,5 +1,6 @@
 package arkhipov.bank.repositories;
 
+import arkhipov.bank.models.Account;
 import arkhipov.bank.models.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,19 +36,19 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     }
 
     @Transactional
-    public Transaction execute(Transaction transaction, Integer debitId, Integer refillId){
-        if (refillId != null && debitId != null) {
-            crudTransactionRepository.transfer(debitId, -transaction.getAmount());
-            crudTransactionRepository.transfer(refillId, transaction.getAmount());
+    public Transaction execute(Transaction transaction){
+        Account debitAccount = transaction.getDebitAccount();
+        Account refillAccount = transaction.getRefillAccount();
+        if (refillAccount != null && debitAccount != null) {
+            crudTransactionRepository.transfer(debitAccount.getId(), -transaction.getAmount());
+            crudTransactionRepository.transfer(refillAccount.getId(), transaction.getAmount());
         }
-        else if (refillId == null && debitId != null) {
-            crudTransactionRepository.transfer(debitId, -transaction.getAmount());
+        else if (refillAccount == null && debitAccount != null) {
+            crudTransactionRepository.transfer(debitAccount.getId(), -transaction.getAmount());
         }
-        else if (refillId != null) {
-            crudTransactionRepository.transfer(refillId, transaction.getAmount());
+        else if (refillAccount != null) {
+            crudTransactionRepository.transfer(refillAccount.getId(), transaction.getAmount());
         }
-        if (debitId != null) transaction.setDebitAccount(accountRepository.findOne(debitId));
-        if (refillId != null) transaction.setRefillAccount(accountRepository.findOne(refillId));
         return crudTransactionRepository.save(transaction);
     }
 }

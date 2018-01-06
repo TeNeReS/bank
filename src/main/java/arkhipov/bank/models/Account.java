@@ -18,11 +18,11 @@ public class Account extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private Person person;
 
-    @JsonIgnoreProperties({"debitAccount", "refillAccount"})
+    @JsonIgnoreProperties(value = {"debitAccount", "refillAccount"}, allowSetters = true)
     @OneToMany(mappedBy = "debitAccount")
     private List<Transaction> debitTransactionList;
 
-    @JsonIgnoreProperties({"debitAccount", "refillAccount"})
+    @JsonIgnoreProperties(value = {"debitAccount", "refillAccount"}, allowSetters = true)
     @OneToMany(mappedBy = "refillAccount")
     private List<Transaction> refillTransactionList;
 

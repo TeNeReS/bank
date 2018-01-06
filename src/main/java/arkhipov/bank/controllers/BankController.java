@@ -51,7 +51,7 @@ public class BankController {
     }
 
     @PostMapping("transactions")
-    public Transaction createTransaction(@RequestBody Transaction transaction, @RequestParam(value = "debitId") Integer debitId, @RequestParam(value = "refillId") Integer refillId) {
-        return transactionRepository.execute(transaction, debitId, refillId);
+    public Transaction createTransaction(@RequestBody Transaction transaction) {
+        return transactionRepository.execute(transaction);
     }
 }

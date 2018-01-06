@@ -12,5 +12,5 @@ public interface TransactionRepository {
 
     List<Transaction> getByPersonId(int personId);
 
-    Transaction execute(Transaction transaction, Integer debitId, Integer refillId);
+    Transaction execute(Transaction transaction);
 }

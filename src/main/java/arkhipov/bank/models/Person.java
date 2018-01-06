@@ -15,7 +15,7 @@ public class Person extends BaseEntity {
     private String address;
     private int age;
 
-    @JsonIgnoreProperties("person")
+    @JsonIgnoreProperties(value = "person", allowSetters = true)
     @OneToMany(mappedBy = "person")
     private List<Account> accountList;
 
