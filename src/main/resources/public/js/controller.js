@@ -24,7 +24,9 @@ bankApp.config(function($routeProvider){
 });
 
 bankApp.factory('Transaction', function($resource) {
-    return $resource('transactions');
+    return $resource('transactions', {}, {query: {isArray: true, method: 'GET', transformResponse: function (data) {
+        return angular.fromJson(data).content;}}
+    });
 });
 
 bankApp.factory('Person', function($resource) {
@@ -54,6 +56,9 @@ bankApp.controller('personsController', function($scope, Person) {
 
 bankApp.controller('transactionsController', function($scope, Transaction) {
     $scope.transactions = Transaction.query();
+    $scope.filterByDate = function () {
+        $scope.transactions = Transaction.query({startDate: $scope.startDate, endDate: $scope.endDate})
+    }
 });
 
 bankApp.controller('accountsController', function($scope, $route, Account, Transaction) {

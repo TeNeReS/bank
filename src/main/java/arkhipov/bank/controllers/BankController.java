@@ -7,8 +7,11 @@ import arkhipov.bank.repositories.AccountRepository;
 import arkhipov.bank.repositories.PersonRepository;
 import arkhipov.bank.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -46,8 +49,8 @@ public class BankController {
     }
 
     @GetMapping("transactions")
-    public List<Transaction> getAllTransactions() {
-        return transactionRepository.getAll();
+    public Page<Transaction> getAllTransactions(Pageable pageable, @RequestParam(value = "startDate", required = false) LocalDate startDate, @RequestParam(value = "endDate", required = false) LocalDate endDate) {
+        return transactionRepository.getAll(pageable);
     }
 
     @PostMapping("transactions")

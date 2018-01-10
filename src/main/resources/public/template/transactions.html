@@ -1,6 +1,13 @@
 <h1>Transactions</h1>
 
-<div ng-controller="transactionsController">
+<div>
+
+    <h2>Filter by date</h2>
+    <form ng-submit="filterByDate()">
+        <label>From:<input type="date" ng-model="startDate" name="startDate"/></label>
+        <label>To:<input type="date" ng-model="endDate" name="endDate"/></label>
+        <input type="submit" id="addAccount" value="Filter" />
+    </form>
 
     <table>
         <tr>
@@ -15,7 +22,7 @@
             <td>{{ transaction.id }}</td>
             <td>{{ transaction.debitAccount.id }}</td>
             <td>{{ transaction.refillAccount.id }}</td>
-            <td>{{ transaction.date }}</td>
+            <td>{{ transaction.date | date : "dd.MM.yyyy HH:mm:ss"}}</td>
             <td>{{ transaction.amount }}</td>
             <td>{{ transaction.description }}</td>
         </tr>

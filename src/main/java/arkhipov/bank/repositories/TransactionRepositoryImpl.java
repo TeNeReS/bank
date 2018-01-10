@@ -3,6 +3,8 @@ package arkhipov.bank.repositories;
 import arkhipov.bank.models.Account;
 import arkhipov.bank.models.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,16 +15,13 @@ import java.util.List;
 public class TransactionRepositoryImpl implements TransactionRepository {
     private CrudTransactionRepository crudTransactionRepository;
 
-    private CrudAccountRepository accountRepository;
-
     @Autowired
-    public TransactionRepositoryImpl(CrudTransactionRepository crudTransactionRepository, CrudAccountRepository accountRepository) {
+    public TransactionRepositoryImpl(CrudTransactionRepository crudTransactionRepository) {
         this.crudTransactionRepository = crudTransactionRepository;
-        this.accountRepository = accountRepository;
     }
 
-    public List<Transaction> getAll() {
-        return (List<Transaction>) crudTransactionRepository.findAll();
+    public Page<Transaction> getAll(Pageable pageable) {
+        return crudTransactionRepository.findAll(pageable);
     }
 
     public List<Transaction> getBetween(Date startDate, Date endDate) {
