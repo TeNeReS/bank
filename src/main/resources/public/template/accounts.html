@@ -20,54 +20,54 @@
     </form>
 
     <h2>Transfer between your accounts</h2>
-    <form ng-submit="transfer()">
+    <form ng-submit="transfer(newInternalTransaction)">
         <label>From account:
         <select ng-options="account.id for account in accounts"
-                ng-model="editTransaction.debitAccount"></select></label>
+                ng-model="newInternalTransaction.debitAccount"></select></label>
 
         <label>To account:
         <select ng-options="account.id for account in accounts"
-                ng-model="editTransaction.refillAccount"></select></label>
+                ng-model="newInternalTransaction.refillAccount"></select></label>
 
-        <label>Amount:<input type="number" ng-model="editTransaction.amount" name="amount"/></label>
-        <label>Description:<input type="text" ng-model="editTransaction.description" name="description"/></label>
+        <label>Amount:<input type="number" ng-model="newInternalTransaction.amount" name="amount"/></label>
+        <label>Description:<input type="text" ng-model="newInternalTransaction.description" name="description"/></label>
         <input type="submit" id="intTransfer" value="Transfer" />
     </form>
 
     <h2>Transfer to another account</h2>
-    <form ng-submit="transfer()">
+    <form ng-submit="transfer(newExternalTransaction)">
         <label>From account:
             <select ng-options="account.id for account in accounts"
-                    ng-model="editTransaction.debitAccount"></select></label>
+                    ng-model="newExternalTransaction.debitAccount"></select></label>
 
         <label>To account:
-            <input type="number" ng-model="editTransaction.refillAccount.id"/></label>
+            <input type="number" ng-model="newExternalTransaction.refillAccount.id"/></label>
 
-        <label>Amount:<input type="number" ng-model="editTransaction.amount" name="amount"/></label>
-        <label>Description:<input type="text" ng-model="editTransaction.description" name="description"/></label>
+        <label>Amount:<input type="number" ng-model="newExternalTransaction.amount" name="amount"/></label>
+        <label>Description:<input type="text" ng-model="newExternalTransaction.description" name="description"/></label>
         <input type="submit" id="extTransfer" value="Transfer" />
     </form>
 
     <h2>Debit</h2>
-    <form ng-submit="transfer()">
+    <form ng-submit="transfer(newDebitTransaction)">
         <label>From account:
             <select ng-options="account.id for account in accounts"
-                    ng-model="editTransaction.debitAccount"></select></label>
+                    ng-model="newDebitTransaction.debitAccount"></select></label>
 
-        <label>Amount:<input type="number" ng-model="editTransaction.amount" name="amount"/></label>
-        <label>Description:<input type="text" ng-model="editTransaction.description" name="description"/></label>
-        <input type="submit" id="debit" value="Debit" />
+        <label>Amount:<input type="number" ng-model="newDebitTransaction.amount" name="amount"/></label>
+        <label>Description:<input type="text" ng-model="newDebitTransaction.description" name="description"/></label>
+        <input type="submit" id="debitTransfer" value="Debit" />
     </form>
 
     <h2>Refill</h2>
-    <form ng-submit="transfer()">
+    <form ng-submit="transfer(newRefillTransaction)">
         <label>To account:
             <select ng-options="account.id for account in accounts"
-                    ng-model="editTransaction.refillAccount"></select></label>
+                    ng-model="newRefillTransaction.refillAccount"></select></label>
 
-        <label>Amount:<input type="number" ng-model="editTransaction.amount" name="amount"/></label>
-        <label>Description:<input type="text" ng-model="editTransaction.description" name="description"/></label>
-        <input type="submit" id="refill" value="Refill" />
+        <label>Amount:<input type="number" ng-model="newRefillTransaction.amount" name="amount"/></label>
+        <label>Description:<input type="text" ng-model="newRefillTransaction.description" name="description"/></label>
+        <input type="submit" id="refillTransfer" value="Refill" />
     </form>
 
 </div>

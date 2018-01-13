@@ -64,7 +64,10 @@ bankApp.controller('transactionsController', function($scope, Transaction) {
 bankApp.controller('accountsController', function($scope, $route, Account, Transaction) {
     $scope.accounts = Account.query({id: $route.current.params.id});
     $scope.editAccount = {};
-    $scope.editTransaction = {};
+    $scope.newInternalTransaction = {};
+    $scope.newExternalTransaction = {};
+    $scope.newDebitTransaction = {};
+    $scope.newRefillTransaction = {};
     $scope.addAccount = function() {
         var newAccount = $scope.editAccount;
         Account.save({id: $route.current.params.id}, newAccount)
@@ -74,12 +77,14 @@ bankApp.controller('accountsController', function($scope, $route, Account, Trans
         $scope.editAccount = {};
     };
 
-    $scope.transfer = function() {
-        var newTransaction = $scope.editTransaction;
+    $scope.transfer = function(newTransaction) {
         Transaction.save(newTransaction)
             .$promise.then(function() {
             $scope.accounts = Account.query({id: $route.current.params.id});
         });
-        $scope.editTransaction = {};
+        $scope.newInternalTransaction = {};
+        $scope.newExternalTransaction = {};
+        $scope.newDebitTransaction = {};
+        $scope.newRefillTransaction = {};
     };
 });
