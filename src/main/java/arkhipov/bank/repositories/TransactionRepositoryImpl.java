@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -24,10 +24,10 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         return crudTransactionRepository.findAll(pageable);
     }
 
-    public List<Transaction> getBetween(Date startDate, Date endDate) {
-        if (startDate == null) startDate = new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 365);
-        if (endDate == null) endDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 365);
-        return crudTransactionRepository.findByDateBetween(startDate, new Date(endDate.getTime() + (1000 * 60 * 60 * 24)));
+    public Page<Transaction> getBetween(LocalDateTime startDate, LocalDateTime endDate, Pageable pageable) {
+        if (startDate == null) startDate = LocalDateTime.of(1000, 1, 1, 0, 0, 0);
+        if (endDate == null) endDate = LocalDateTime.now();
+        return crudTransactionRepository.findByDateBetween(startDate, endDate, pageable);
     }
 
     public List<Transaction> getByPersonId(int personId) {

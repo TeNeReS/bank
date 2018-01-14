@@ -9,9 +9,10 @@ import arkhipov.bank.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -49,8 +50,10 @@ public class BankController {
     }
 
     @GetMapping("transactions")
-    public Page<Transaction> getAllTransactions(Pageable pageable, @RequestParam(value = "startDate", required = false) LocalDate startDate, @RequestParam(value = "endDate", required = false) LocalDate endDate) {
-        return transactionRepository.getAll(pageable);
+    public Page<Transaction> getAllTransactions(Pageable pageable, @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime startDate, @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime endDate) {
+        if (startDate != null || endDate != null)
+            return transactionRepository.getBetween(startDate, endDate, pageable);
+        else return transactionRepository.getAll(pageable);
     }
 
     @PostMapping("transactions")
