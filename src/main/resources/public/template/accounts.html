@@ -1,78 +1,209 @@
 <h1>Accounts</h1>
 
-<div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-xs-4">
+                <h2>Add account</h2>
+                <form class="form-horizontal" ng-submit="addAccount()" name="formAdd">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Amount:</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="number" ng-model="editAccount.amount" name="amount"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" class="btn btn-default" id="addAccount" value="Add account"
+                                   ng-disabled="formAdd.amount.$error.required"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Amount</th>
-        </tr>
-        <tr ng-repeat="account in accounts">
-            <td>{{ account.id }}</td>
-            <td>{{ account.amount }}</td>
-        </tr>
-    </table>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-xs-3">
+                <h2>Transfer between your accounts</h2>
+                <form class="form-horizontal" ng-submit="transfer(newInternalTransaction)"
+                      name="formInternalTransfer">
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">From account:</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" ng-options="account.id for account in accounts"
+                                    ng-model="newInternalTransaction.debitAccount"
+                                    name="debitAccount" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">To account:</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" ng-options="account.id for account in accounts"
+                                    ng-model="newInternalTransaction.refillAccount"
+                                    name="refillAccount" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Amount:</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="number" ng-model="newInternalTransaction.amount"
+                                   name="amount"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Description:</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="text"
+                                   ng-model="newInternalTransaction.description"
+                                   name="description"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-5 col-sm-7">
+                            <input type="submit" class="btn btn-default" id="intTransfer" value="Transfer"
+                                   ng-disabled="formInternalTransfer.debitAccount.$error.required || formInternalTransfer.refillAccount.$error.required || formInternalTransfer.amount.$error.required"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-3">
+                <h2>Transfer to another account</h2>
+                <form class="form-horizontal" ng-submit="transfer(newExternalTransaction)" name="formExternalTransfer">
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">From account:</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" ng-options="account.id for account in accounts"
+                                    ng-model="newExternalTransaction.debitAccount"
+                                    name="debitAccount" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">To account:</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="number" ng-model="newExternalTransaction.refillAccount.id"
+                                   name="refillAccount"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Amount:</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="number" ng-model="newExternalTransaction.amount"
+                                   name="amount" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Description:</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="text" ng-model="newExternalTransaction.description"
+                                   name="description"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-5 col-sm-7">
+                            <input type="submit" class="btn btn-default" id="extTransfer" value="Transfer"
+                                   ng-disabled="formExternalTransfer.debitAccount.$error.required || formExternalTransfer.refillAccount.$error.required || formExternalTransfer.amount.$error.required"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-3">
+                <h2>Debit</h2>
+                <form class="form-horizontal" ng-submit="transfer(newDebitTransaction)" name="formDebitTransfer">
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">From account:</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" ng-options="account.id for account in accounts"
+                                    ng-model="newDebitTransaction.debitAccount"
+                                    name="debitAccount" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Amount:</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="number" ng-model="newDebitTransaction.amount"
+                                   name="amount"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Description:</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="text" ng-model="newDebitTransaction.description"
+                                   name="description"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-5 col-sm-7">
+                            <input type="submit" class="btn btn-default" id="debitTransfer" value="Debit"
+                                   ng-disabled="formDebitTransfer.debitAccount.$error.required || formDebitTransfer.amount.$error.required"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-3">
+                <h2>Refill</h2>
+                <form class="form-horizontal" ng-submit="transfer(newRefillTransaction)" name="formRefillTransfer">
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">To account:</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" ng-options="account.id for account in accounts"
+                                    ng-model="newRefillTransaction.refillAccount"
+                                    name="refillAccount" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Amount:</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="number" ng-model="newRefillTransaction.amount"
+                                   name="amount"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Description:</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" type="text" ng-model="newRefillTransaction.description"
+                                   name="description"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-5 col-sm-7">
+                            <input type="submit" class="btn btn-default" id="refillTransfer" value="Refill"
+                                   ng-disabled="formRefillTransfer.refillAccount.$error.required || formRefillTransfer.amount.$error.required"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <h2>Add account</h2>
-    <form ng-submit="addAccount()" name="formAdd">
-        <label>Amount:<input type="number" ng-model="editAccount.amount" name="amount" required/></label>
-        <input type="submit" id="addAccount" value="Add account" ng-disabled="formAdd.amount.$error.required"/>
-    </form>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Amount</th>
+            </tr>
+            <tr ng-repeat="account in accounts">
+                <td>{{ account.id }}</td>
+                <td>{{ account.amount }}</td>
+            </tr>
+        </table>
 
-    <h2>Transfer between your accounts</h2>
-    <form ng-submit="transfer(newInternalTransaction)" name="formInternalTransfer">
-        <label>From account:
-        <select ng-options="account.id for account in accounts"
-                ng-model="newInternalTransaction.debitAccount"
-                name="debitAccount" required></select></label>
-
-        <label>To account:
-        <select ng-options="account.id for account in accounts"
-                ng-model="newInternalTransaction.refillAccount"
-                name="refillAccount" required></select></label>
-
-        <label>Amount:<input type="number" ng-model="newInternalTransaction.amount" name="amount" required/></label>
-        <label>Description:<input type="text" ng-model="newInternalTransaction.description" name="description"/></label>
-        <input type="submit" id="intTransfer" value="Transfer" ng-disabled="formInternalTransfer.debitAccount.$error.required || formInternalTransfer.refillAccount.$error.required || formInternalTransfer.amount.$error.required"/>
-    </form>
-
-    <h2>Transfer to another account</h2>
-    <form ng-submit="transfer(newExternalTransaction)" name="formExternalTransfer">
-        <label>From account:
-            <select ng-options="account.id for account in accounts"
-                    ng-model="newExternalTransaction.debitAccount"
-                    name="debitAccount" required></select></label>
-
-        <label>To account:
-            <input type="number" ng-model="newExternalTransaction.refillAccount.id" name="refillAccount" required/></label>
-
-        <label>Amount:<input type="number" ng-model="newExternalTransaction.amount" name="amount" required/></label>
-        <label>Description:<input type="text" ng-model="newExternalTransaction.description" name="description"/></label>
-        <input type="submit" id="extTransfer" value="Transfer" ng-disabled="formExternalTransfer.debitAccount.$error.required || formExternalTransfer.refillAccount.$error.required || formExternalTransfer.amount.$error.required"/>
-    </form>
-
-    <h2>Debit</h2>
-    <form ng-submit="transfer(newDebitTransaction)" name="formDebitTransfer">
-        <label>From account:
-            <select ng-options="account.id for account in accounts"
-                    ng-model="newDebitTransaction.debitAccount"
-                    name="debitAccount" required></select></label>
-
-        <label>Amount:<input type="number" ng-model="newDebitTransaction.amount" name="amount" required/></label>
-        <label>Description:<input type="text" ng-model="newDebitTransaction.description" name="description"/></label>
-        <input type="submit" id="debitTransfer" value="Debit" ng-disabled="formDebitTransfer.debitAccount.$error.required || formDebitTransfer.amount.$error.required"/>
-    </form>
-
-    <h2>Refill</h2>
-    <form ng-submit="transfer(newRefillTransaction)" name="formRefillTransfer">
-        <label>To account:
-            <select ng-options="account.id for account in accounts"
-                    ng-model="newRefillTransaction.refillAccount"
-                    name="refillAccount" required></select></label>
-
-        <label>Amount:<input type="number" ng-model="newRefillTransaction.amount" name="amount" required/></label>
-        <label>Description:<input type="text" ng-model="newRefillTransaction.description" name="description"/></label>
-        <input type="submit" id="refillTransfer" value="Refill" ng-disabled="formRefillTransfer.refillAccount.$error.required || formRefillTransfer.amount.$error.required"/>
-    </form>
-
+        <div class="text-center">
+            <ul class="pagination">
+                <li><a href="#">Previous</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">Next</a></li>
+            </ul>
+        </div>
+    </div>
 </div>

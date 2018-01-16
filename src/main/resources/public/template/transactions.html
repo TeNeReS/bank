@@ -1,31 +1,61 @@
 <h1>Transactions</h1>
 
-<div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-xs-4">
+                <h2>Filter by date</h2>
+                <form class="form-horizontal" ng-submit="filterByDate()">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">From:</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="date" ng-model="startDate" name="startDate"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">To:</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" ng-model="endDate" name="endDate"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" class="btn btn-default" id="addAccount" value="Filter"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <h2>Filter by date</h2>
-    <form ng-submit="filterByDate()">
-        <label>From:<input type="date" ng-model="startDate" name="startDate"/></label>
-        <label>To:<input type="date" ng-model="endDate" name="endDate"/></label>
-        <input type="submit" id="addAccount" value="Filter" />
-    </form>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Debit Account</th>
+                <th>Refill Account</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Description</th>
+            </tr>
+            <tr ng-repeat="transaction in transactions">
+                <td>{{ transaction.id }}</td>
+                <td>{{ transaction.debitAccount.id }}</td>
+                <td>{{ transaction.refillAccount.id }}</td>
+                <td>{{ transaction.date | date : "dd.MM.yyyy HH:mm:ss"}}</td>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.description }}</td>
+            </tr>
+        </table>
 
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Debit Account</th>
-            <th>Refill Account</th>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Description</th>
-        </tr>
-        <tr ng-repeat="transaction in transactions">
-            <td>{{ transaction.id }}</td>
-            <td>{{ transaction.debitAccount.id }}</td>
-            <td>{{ transaction.refillAccount.id }}</td>
-            <td>{{ transaction.date | date : "dd.MM.yyyy HH:mm:ss"}}</td>
-            <td>{{ transaction.amount }}</td>
-            <td>{{ transaction.description }}</td>
-        </tr>
-    </table>
-
+        <div class="text-center">
+            <ul class="pagination">
+                <li><a href="#">Previous</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">Next</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
