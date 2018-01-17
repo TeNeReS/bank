@@ -4,4 +4,4 @@
 - список счетов заданного клиента с формами перевода денег;
 - страница со списком транзакций с фильтрацией.
 
-Технологии: Maven, Spring Data, Hibernate, PostgreSQL, H2, JSF, PrimeFaces.
+Технологии: Gradle, Spring Boot, Hibernate, PostgreSQL, AngularJS, Boostrap.
