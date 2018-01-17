@@ -55,12 +55,16 @@ bankApp.controller('personsController', function($scope, Person) {
 });
 
 bankApp.controller('transactionsController', function($scope, $filter, Transaction) {
-    $scope.transactions = Transaction.query();
-    $scope.filterByDate = function () {
-        var startDate = $filter('date')($scope.startDate, "yyyy-MM-dd'T'HH:mm:ss");
-        var endDate = $filter('date')($scope.endDate, "yyyy-MM-dd'T'HH:mm:ss");
-        $scope.transactions = Transaction.query({startDate: startDate, endDate: endDate})
-    }
+    $scope.currentPage = 1;
+    $scope.size = 2;
+    $scope.getTransactions = function () {
+        if ($scope.currentPage >= 1) {
+            var startDate = $filter('date')($scope.startDate, "yyyy-MM-dd'T'HH:mm:ss");
+            var endDate = $filter('date')($scope.endDate, "yyyy-MM-dd'T'HH:mm:ss");
+            $scope.transactions = Transaction.query({page: $scope.currentPage - 1, size: $scope.size, startDate: startDate, endDate: endDate})
+        }
+    };
+    $scope.getTransactions();
 });
 
 bankApp.controller('accountsController', function($scope, $route, Account, Transaction) {
